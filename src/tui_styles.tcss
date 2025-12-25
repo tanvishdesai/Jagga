@@ -1,0 +1,391 @@
+/* Chat Analyzer TUI - Custom Styles */
+/* A premium dark-mode aesthetic */
+
+/* ===== Global Styles ===== */
+Screen {
+    background: $surface;
+}
+
+/* ===== Header Component ===== */
+Header {
+    dock: top;
+    height: 3;
+    background: #5b21b6;
+    color: white;
+    text-style: bold;
+}
+
+/* ===== Footer Component ===== */
+Footer {
+    dock: bottom;
+    height: 1;
+}
+
+/* ===== Welcome Screen ===== */
+#welcome-container {
+    width: 100%;
+    height: 100%;
+    align: center middle;
+}
+
+#app-title {
+    text-align: center;
+    color: #a78bfa;
+    text-style: bold;
+    padding: 1 2;
+}
+
+#app-subtitle {
+    text-align: center;
+    color: $text-muted;
+    padding: 0 2 2 2;
+}
+
+#feature-cards {
+    layout: horizontal;
+    height: auto;
+    align: center middle;
+    padding: 2;
+}
+
+.feature-card {
+    width: 20;
+    height: 7;
+    border: round #7c3aed;
+    padding: 1 2;
+    margin: 0 1;
+    background: $surface-lighten-1;
+    text-align: center;
+}
+
+.feature-card:hover {
+    background: #5b21b6;
+    border: round #a78bfa;
+}
+
+.feature-card:focus {
+    background: #7c3aed;
+    border: round white;
+}
+
+#action-buttons {
+    layout: horizontal;
+    align: center middle;
+    padding: 2;
+    height: auto;
+}
+
+.primary-button {
+    margin: 0 1;
+    min-width: 20;
+}
+
+.secondary-button {
+    margin: 0 1;
+    min-width: 16;
+}
+
+/* ===== File Selection Screen ===== */
+#file-browser-container {
+    width: 100%;
+    height: 100%;
+    padding: 1;
+}
+
+#path-display {
+    height: auto;
+    min-height: 3;
+    background: $surface-lighten-1;
+    border: round $primary;
+    padding: 1;
+    margin-bottom: 1;
+}
+
+#file-list {
+    height: 1fr;
+    min-height: 10;
+    border: round $primary;
+    background: $surface;
+    margin-bottom: 1;
+}
+
+#filter-bar {
+    dock: bottom;
+    height: auto;
+    min-height: 3;
+    layout: horizontal;
+    align: center middle;
+    padding: 1;
+    background: $surface-lighten-1;
+}
+
+#filter-bar Button {
+    margin: 0 1;
+}
+
+/* ===== Settings Screen ===== */
+#settings-container {
+    width: 100%;
+    height: 100%;
+    padding: 1 2;
+}
+
+#settings-container Static {
+    height: auto;
+}
+
+#settings-container Switch {
+    margin: 0 0 1 2;
+}
+
+#settings-container Input {
+    width: 30;
+    margin: 0 0 1 2;
+}
+
+#settings-container Button {
+    margin: 0 0 1 0;
+    width: auto;
+}
+
+.settings-divider {
+    color: #a78bfa;
+    text-style: bold;
+    margin: 1 0;
+}
+
+#settings-actions {
+    layout: horizontal;
+    height: auto;
+    align: center middle;
+    padding: 1;
+    margin-top: 1;
+}
+
+#settings-actions Button {
+    margin: 0 1;
+}
+
+/* ===== Processing Screen ===== */
+#processing-container {
+    width: 100%;
+    height: 100%;
+    padding: 2;
+}
+
+#current-task-box {
+    height: 12;
+    border: round #3b82f6;
+    padding: 1 2;
+    margin-bottom: 1;
+    background: $surface-lighten-1;
+}
+
+#task-title {
+    text-style: bold;
+    color: #3b82f6;
+    padding-bottom: 1;
+}
+
+#progress-bar {
+    height: 3;
+    margin: 1 0;
+}
+
+#progress-stats {
+    color: $text-muted;
+    text-align: center;
+}
+
+#log-container {
+    height: 1fr;
+    border: round $primary;
+    padding: 1;
+    background: $surface;
+}
+
+#log-title {
+    text-style: bold;
+    color: #a78bfa;
+    dock: top;
+}
+
+#task-log {
+    height: 1fr;
+}
+
+.log-entry-success {
+    color: #10b981;
+}
+
+.log-entry-info {
+    color: #3b82f6;
+}
+
+.log-entry-warning {
+    color: #f59e0b;
+}
+
+.log-entry-error {
+    color: #ef4444;
+}
+
+#processing-actions {
+    dock: bottom;
+    height: 3;
+    layout: horizontal;
+    align: center middle;
+    padding: 1;
+}
+
+/* ===== Results Screen ===== */
+#results-main {
+    width: 100%;
+    height: 100%;
+    padding: 1;
+}
+
+#summary-box {
+    height: auto;
+    border: round #10b981;
+    padding: 1 2;
+    margin-bottom: 1;
+    background: $surface-lighten-1;
+}
+
+#summary-title {
+    text-style: bold;
+    color: #10b981;
+    text-align: center;
+    padding-bottom: 1;
+}
+
+#results-tabs {
+    height: 1fr;
+    background: $surface;
+}
+
+#results-tabs TabPane {
+    padding: 1;
+}
+
+#gifts-content, #relationship-content, #files-content {
+    height: 100%;
+    padding: 1;
+    background: $surface;
+}
+
+#results-actions {
+    dock: bottom;
+    height: auto;
+    min-height: 3;
+    layout: horizontal;
+    align: center middle;
+    padding: 1;
+    background: $surface-lighten-1;
+}
+
+#results-actions Button {
+    margin: 0 1;
+}
+
+/* ===== Previous Results Screen ===== */
+#prev-results-container {
+    width: 100%;
+    height: 100%;
+    padding: 1;
+}
+
+#prev-results-container #results-table {
+    height: 1fr;
+    border: round $primary;
+}
+
+#prev-results-actions {
+    dock: bottom;
+    height: auto;
+    min-height: 3;
+    layout: horizontal;
+    align: center middle;
+    padding: 1;
+    background: $surface-lighten-1;
+}
+
+#prev-results-actions Button {
+    margin: 0 1;
+}
+
+/* ===== Help Screen ===== */
+#help-container {
+    width: 100%;
+    height: 1fr;
+    padding: 1 2;
+}
+
+/* ===== Common Components ===== */
+.section-title {
+    text-style: bold;
+    color: #a78bfa;
+    padding: 1 0;
+}
+
+.divider {
+    height: 1;
+    background: $surface-lighten-2;
+    margin: 1 0;
+}
+
+/* Loading Spinner */
+LoadingIndicator {
+    color: #a78bfa;
+}
+
+/* DataTable styling */
+DataTable {
+    height: 100%;
+}
+
+/* Switch styling */
+Switch {
+    height: 3;
+}
+
+/* Input styling */
+Input {
+    border: round $primary;
+}
+
+Input:focus {
+    border: round #7c3aed;
+}
+
+/* Button variants */
+.success-button {
+    background: #10b981;
+}
+
+.warning-button {
+    background: #f59e0b;
+    color: black;
+}
+
+.danger-button {
+    background: #ef4444;
+}
+
+/* Markdown viewer */
+Markdown {
+    padding: 1 2;
+}
+
+MarkdownH1 {
+    color: #a78bfa;
+    text-style: bold;
+    padding: 1 0;
+}
+
+MarkdownH2 {
+    color: #7c3aed;
+    text-style: bold;
+    padding: 1 0;
+}
