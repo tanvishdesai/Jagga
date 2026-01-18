@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Chat Insight & Gift AI",
-  description: "Analyze WhatsApp chats for relationship insights and gift recommendations.",
+  title: "Jagga - Chat Preprocessor",
+  description: "Transform your WhatsApp and Instagram chat exports into AI-ready data",
 };
 
 export default function RootLayout({
