@@ -84,29 +84,72 @@ export default function Home() {
   };
 
   return (
-    <div className="app-container">
-      {/* Background decoration */}
-      <div className="bg-gradient"></div>
-      <div className="bg-pattern"></div>
-      
-      <main className="main-content">
-        {/* Header */}
-        <header className="header">
-          <div className="logo">
-            <span className="logo-icon">💬</span>
-            <h1 className="logo-text">Jagga</h1>
+    <div className="app-shell">
+      <div className="bg-aurora"></div>
+      <div className="bg-grid"></div>
+
+      <main className="page">
+        <header className="topbar">
+          <div className="brand">
+            <span className="brand-icon">💬</span>
+            <div>
+              <p className="brand-name">Jagga</p>
+              <p className="brand-tag">Chat export converter</p>
+            </div>
           </div>
-          <p className="tagline">Transform your chat exports into AI-ready data</p>
+          <div className="topbar-actions">
+            <span className="pill">Private by design</span>
+          </div>
         </header>
 
-        {/* Upload Section */}
-        <section className="upload-section">
-          <div className="card">
-            <h2 className="card-title">Upload Your Chat Files</h2>
-            <p className="card-description">
-              Upload your WhatsApp chat export and optionally add Instagram messages 
-              to get preprocessed JSON files ready for AI analysis.
+        <section className="hero">
+          <div className="hero-copy">
+            <span className="eyebrow">AI-ready chat datasets</span>
+            <h1>Turn WhatsApp + Instagram exports into clean JSON</h1>
+            <p>
+              Upload your chat exports, optionally compress the output, and download a neatly
+              packaged zip in seconds. Built for researchers, analysts, and personal archiving.
             </p>
+            <div className="hero-badges">
+              <span className="badge">Zero storage</span>
+              <span className="badge">Fast processing</span>
+              <span className="badge">Local friendly</span>
+            </div>
+          </div>
+          <div className="hero-card">
+            <div className="hero-card-title">How it works</div>
+            <ol className="steps">
+              <li>
+                <span className="step-index">01</span>
+                <div>
+                  <p className="step-title">Upload exports</p>
+                  <p className="step-text">WhatsApp .txt and optional Instagram .json</p>
+                </div>
+              </li>
+              <li>
+                <span className="step-index">02</span>
+                <div>
+                  <p className="step-title">Process securely</p>
+                  <p className="step-text">Clean, normalize, and structure messages</p>
+                </div>
+              </li>
+              <li>
+                <span className="step-index">03</span>
+                <div>
+                  <p className="step-title">Download zip</p>
+                  <p className="step-text">Ready-to-use JSON for AI and analytics</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <section className="content-grid">
+          <div className="panel">
+            <div className="panel-header">
+              <h2>Upload your files</h2>
+              <p>Drag, drop, and let Jagga do the rest.</p>
+            </div>
 
             <div className="upload-grid">
               <FileUpload
@@ -130,7 +173,6 @@ export default function Home() {
               />
             </div>
 
-            {/* Compression Toggle */}
             <div className="compression-toggle">
               <label className="toggle-container">
                 <input
@@ -147,7 +189,6 @@ export default function Home() {
               </label>
             </div>
 
-            {/* Error Message */}
             {error && (
               <div className="error-message">
                 <span className="error-icon">⚠️</span>
@@ -155,7 +196,6 @@ export default function Home() {
               </div>
             )}
 
-            {/* Progress Message */}
             {progress && (
               <div className="progress-message">
                 <span className="progress-spinner"></span>
@@ -163,7 +203,6 @@ export default function Home() {
               </div>
             )}
 
-            {/* Process Button */}
             <button
               className={`process-button ${isProcessing ? 'processing' : ''} ${!whatsappFile ? 'disabled' : ''}`}
               onClick={handleProcess}
@@ -182,30 +221,54 @@ export default function Home() {
               )}
             </button>
           </div>
+
+          <aside className="panel panel-alt">
+            <div className="panel-header">
+              <h3>Quality checks</h3>
+              <p>We format, validate, and package your data for downstream use.</p>
+            </div>
+            <div className="stat-list">
+              <div className="stat">
+                <span className="stat-label">Output</span>
+                <span className="stat-value">Structured JSON</span>
+              </div>
+              <div className="stat">
+                <span className="stat-label">Processing</span>
+                <span className="stat-value">Smart parsing</span>
+              </div>
+              <div className="stat">
+                <span className="stat-label">Delivery</span>
+                <span className="stat-value">Instant zip</span>
+              </div>
+            </div>
+            <div className="info-card">
+              <p className="info-title">Tip</p>
+              <p className="info-text">
+                For massive exports, turn on compression and keep the browser tab open until
+                your download starts.
+              </p>
+            </div>
+          </aside>
         </section>
 
-        {/* Features Section */}
-        <section className="features-section">
-          <div className="features-grid">
-            <div className="feature-card">
-              <div className="feature-icon">📤</div>
-              <h3>Easy Upload</h3>
-              <p>Drag and drop your chat exports</p>
-            </div>
-            <div className="feature-card">
-              <div className="feature-icon">⚙️</div>
-              <h3>Smart Processing</h3>
-              <p>Optimized JSON format for AI</p>
-            </div>
-            <div className="feature-card">
-              <div className="feature-icon">📥</div>
-              <h3>Instant Download</h3>
-              <p>Get your files as a zip archive</p>
-            </div>
+        <section className="feature-strip">
+          <div className="feature-card">
+            <div className="feature-icon">📤</div>
+            <h3>Easy Upload</h3>
+            <p>Drag and drop your chat exports</p>
+          </div>
+          <div className="feature-card">
+            <div className="feature-icon">🧠</div>
+            <h3>AI Friendly</h3>
+            <p>Normalized message structure</p>
+          </div>
+          <div className="feature-card">
+            <div className="feature-icon">⚡</div>
+            <h3>Quick Download</h3>
+            <p>Get your files as a zip archive</p>
           </div>
         </section>
 
-        {/* Footer */}
         <footer className="footer">
           <p>Your data is processed locally and never stored on our servers.</p>
         </footer>
