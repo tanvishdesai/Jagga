@@ -13,13 +13,17 @@ else:
 def parse_whatsapp(file_path: Path) -> List[UnifiedMessage]:
     """
     Parses WhatsApp exported text file.
+    Supports 24h and 12h formats, 2 or 4 digit years.
     Format line: "18/07/2024, 19:09 - User Name: Message"
+             or: "28/08/23, 11:53 am - User Name: Message"
     """
     messages = []
     # Regex to capture: Date, Time, Sender, Message
-    # Example: 18/07/2024, 19:09 - Sneha Bajaj LDRP: Kya similarity hai?
-    # Note: Sender name can contain spaces. Message can be multiline.
-    pattern = re.compile(r"^(\d{2}/\d{2}/\d{4}), (\d{2}:\d{2}) - (.*?): (.*)$")
+    # Improved regex to handle:
+    # - Date: d/m/y or d/m/Y (2 or 4 digits)
+    # - Time: H:M or I:M am/pm (optional space/narrow non-break space)
+    # - Sender: Any characters until ": "
+    pattern = re.compile(r"^(\d{1,2}/\d{1,2}/\d{2,4}), (\d{1,2}:\d{2}(?:(?:\s|[\u202f])?[a-zA-Z]{2})?) - (.*?): (.*)$")
     
     current_msg = None
     
@@ -39,12 +43,46 @@ def parse_whatsapp(file_path: Path) -> List[UnifiedMessage]:
                 
                 # Handling "Media omitted"
                 if content.strip() == "<Media omitted>":
-                    current_msg = None # Skip media messages for now or mark them? 
-                    # Let's skip them for text analysis to reduce noise
+                    current_msg = None 
                     continue
 
-                dt = datetime.strptime(f"{date_str} {time_str}", "%d/%m/%Y %H:%M")
+                # Normalize time string: 
+                # Replace narrow no-break space (\u202f) with standard space
+                # ensuring AM/PM is standard
+                clean_time_str = time_str.replace('\u202f', ' ').strip()
                 
+                # Try multiple formats
+                dt = None
+                formats_to_try = [
+                    "%d/%m/%Y %H:%M",       # 24h, 4-digit year
+                    "%d/%m/%y %H:%M",       # 24h, 2-digit year
+                    "%d/%m/%Y %I:%M %p",    # 12h, 4-digit year
+                    "%d/%m/%y %I:%M %p",    # 12h, 2-digit year
+                    "%d/%m/%Y %I:%M%p",     # 12h, 4-digit year (no space)
+                    "%d/%m/%y %I:%M%p",     # 12h, 2-digit year (no space)
+                    "%d/%m/%y %I:%M %p"     # fallbacks logic handling case insensitivity via upper() below
+                ]
+                
+                full_dt_str = f"{date_str} {clean_time_str}"
+                
+                # Helper to handle AM/PM case insensitivity
+                # strptime %p requires AM/PM usually
+                upper_dt_str = full_dt_str.upper().replace("AM", "AM").replace("PM", "PM")
+
+                for fmt in formats_to_try:
+                    try:
+                        dt = datetime.strptime(upper_dt_str, fmt)
+                        break
+                    except ValueError:
+                        continue
+                
+                if not dt:
+                    # If all parsing fails, log warning or skip?
+                    # For now, let's skip silently or maybe just print debug if strict
+                    # print(f"Failed to parse date: {full_dt_str}")
+                    current_msg = None
+                    continue
+
                 current_msg = UnifiedMessage(
                     timestamp=dt,
                     platform="WhatsApp",
